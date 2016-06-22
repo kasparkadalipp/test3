@@ -12,7 +12,6 @@ public class Main {
 		double Cash;
 		int multiplier = 2;	
 		double winRange = 47.5;
-		int roll = 0;
 		double result;	
 		int wins = 0;
 		double probability;
