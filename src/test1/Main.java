@@ -9,24 +9,60 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		int die1 , die2, die3, die4, die5;
-		int rolls = 0;
+		double Cash;
+		int multiplier = 2;	
+		double winRange = 47.5;
+		int roll = 0;
+		double result;	
+		int wins = 0;
+		double probability;
+		double bet;
 
-		do{
-		die1 = (int)(Math.random()*6)+1;
-		die2 = (int)(Math.random()*6)+1;
-		die3 = (int)(Math.random()*6)+1;
-		die4 = (int)(Math.random()*6)+1;
-		die5 = (int)(Math.random()*6)+1;
-		rolls++;
-		}while(( die1 != 6 || die2 != 6 || die3 != 6 || die4 != 6 || die5 != 6)
-				&&( die1 != 5 || die2 != 5 || die3 != 5 || die4 != 5 || die5 != 5)
-				&&( die1 != 4 || die2 != 4 || die3 != 4 || die4 != 4 || die5 != 4)
-				&&( die1 != 3 || die2 != 3 || die3 != 3 || die4 != 3 || die5 != 3)
-				&&( die1 != 2 || die2 != 2 || die3 != 2 || die4 != 2 || die5 != 2)
-				&&( die1 != 1 || die2 != 1 || die3 != 1 || die4 != 1 || die5 != 1));
-		
-		 System.out.println("It took " + rolls);
+		int numberOfTests=100000;
+		double origianlBet = 0.01;
+		double goal = 103;
+
+
+
+		for(int i = 0;i<numberOfTests;i++){	
+			Cash = 60;
+			bet = origianlBet;
+			while(Cash < goal && Cash > 0){ 
+				result = Math.random()*100;
+				//roll++;
+				if(result > winRange) { // loss
+					Cash -= bet;
+					//System.out.printf("%.2f",Cash);
+					//System.out.println("€ loss:\t-" + Bet);
+					bet*=multiplier;
+				}
+				// BAD OPTION
+//				else if(bet >= 20){ 
+//					bet = 10;
+//				}
+				else{//if
+					Cash += bet;
+					//System.out.printf("%.2f",Cash);
+					//System.out.println("€ win:\t+" + Bet);
+					bet = origianlBet;
+				}//else
+			}//while
+			if (Cash >= goal){
+				//System.out.println("Result: I won");
+				//System.out.println("");
+				wins++;
+			} // if
+			//else {
+			//System.out.println("Result: I lost");
+			//System.out.println("");
+			//} // else
+		}// for
+
+		probability = (double)wins/numberOfTests*100;
+		System.out.print("Win chance is: ");
+		System.out.printf("%.2f", probability);
+		System.out.println("%");
+		//		System.out.println("times won: " + wins);
 
 
 		/*		
@@ -49,7 +85,7 @@ public class Main {
 
 		/*
 public class Main extends Applet {
-	public void paint(Graphics g) { // �l: see mida kirjutan tuleb joonisena tagasi
+	public void paint(Graphics g) { // ül: see mida kirjutan tuleb joonisena tagasi
 
 		int x1 = 350;	// Keskpunkt x
 		int y1 = 350;   // Keskpunkt y
